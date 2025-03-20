@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>f8b30a50-6e72-474e-8058-9364891b46d4</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductCategory.Domain\ProductCategory.Domain.csproj" />
+    <ProjectReference Include="..\ProdutoCategory.Data\ProdutoCategory.Data.csproj" />
+  </ItemGroup>
+
+</Project>
