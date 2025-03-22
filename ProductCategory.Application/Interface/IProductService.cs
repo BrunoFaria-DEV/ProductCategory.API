@@ -10,6 +10,6 @@ namespace ProductCategory.Application.Interface
         Task<List<ProductDto>> GetByName(string name);
         Task<bool> Add(ProductDto dto);
         Task<bool> Update(int id, ProductDto dto);
-        Task<bool> Delete(ProductDto dto);
+        Task<bool> Delete(int id);
     }
 }

@@ -10,66 +10,90 @@ using System.Threading.Tasks;
 
 namespace ProductCategory.Application.Service
 {
-    public class ProductService(IProductsRepository _repository) : IProductService
+    public class ProductService(IProductRepository repository) : IProductService
     {
+        private readonly IProductRepository _repository = repository;
+
         public async Task<List<ProductDto>> Get()
         {
-            var entities = await _repository.Get();
-            List<ProductDto> dto = [];
+            var products = await _repository.Get();
+            List<ProductDto> productDto = new List<ProductDto>();
             //automapper
-            if (entities != null)
+            if (products != null)
             {
-                foreach (var item in entities)
+                foreach (var item in products)
                 {
-                    dto.Add(
-                            new ProductDto() { Name = item.Name, Description = item.Description }
+                    productDto.Add(
+                            new ProductDto() { Id = item.Id, Name = item.Name, Description = item.Description }
                         );
                 };
             }
             //automapper
-            return dto;
+            return productDto;
         }
 
         public async Task<ProductDto> GetById(int id)
         {
-            var entity = await _repository.GetById(id);
-            var dto = new ProductDto() { Id = entity.Id, Name =entity.Name, Description = entity.Description };
-            return dto;
+            var product = await _repository.GetById(id);
+            //automapper
+            var productDto = new ProductDto() { Id = product.Id, Name =product.Name, Description = product.Description };
+            //automapper
+            return productDto;
         }
 
         public async Task<List<ProductDto>> GetByName(string name)
         {
-            var entities = await _repository.GetByName(name);
-            List<ProductDto> dto = [];
+            var products = await _repository.GetByName(name);
+            List<ProductDto> productDto = [];
             //automapper
-            if (entities != null)
+            if (products != null)
             {
-                foreach (var item in entities)
+                foreach (var item in products)
                 {
-                    dto.Add(
-                            new ProductDto() { Name = item.Name, Description = item.Description }
+                    productDto.Add(
+                            new ProductDto() { Id = item.Id, Name = item.Name, Description = item.Description }
                         );
                 };
             }
             //automapper
-            return dto;
+            return productDto;
         }
 
-        public async Task<bool> Add(ProductDto dto)
+        public async Task<bool> Add(ProductDto productDto)
         {
-            Product entity = new Product(dto.Name, dto.Description);
-            _repository.Add(entity);
+            Product product = new Product(productDto.Name, productDto.Description);
+            _repository.Add(product);
+
             return await _repository.SaveChanges();
         }
 
-        public void Update(ProductDto dto)
+        public async Task<bool> Update(int id, ProductDto productDto)
         {
-            throw new NotImplementedException();
+            var product = await _repository.GetById(id);
+            if (product == null) 
+            {
+                return false;
+            }
+            //automapper
+            product.Update(productDto.Name, productDto.Description);
+            //automapper
+
+            _repository.Update(product);
+
+            return await _repository.SaveChanges();
         }
 
-        public void Delete(ProductDto dto)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var product = await _repository.GetById(id);
+            if (product == null)
+            {
+                return false;
+            }
+
+            _repository.Delete(product);
+
+            return await _repository.SaveChanges();
         }
     }
 }

@@ -24,8 +24,4 @@
     <ProjectReference Include="..\ProductCategory.Domain\ProductCategory.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProdutoCategory.Data.Interface
 {
-    public interface IProductsRepository
+    public interface IProductRepository
     {
         Task<List<Product>> Get();
         Task<Product> GetById(int id);

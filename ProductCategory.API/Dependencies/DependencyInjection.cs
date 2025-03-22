@@ -1,4 +1,6 @@
-﻿using ProdutoCategory.Data.Interface;
+﻿using ProductCategory.Application.Interface;
+using ProductCategory.Application.Service;
+using ProdutoCategory.Data.Interface;
 using ProdutoCategory.Data.Repository;
 
 namespace ProductCategory.API.Dependencies
@@ -7,7 +9,8 @@ namespace ProductCategory.API.Dependencies
     {
         public static void Injectable(this IServiceCollection service)
         {
-            service.AddScoped<IProductsRepository, ProductsRepository>();
+            service.AddScoped<IProductService, ProductService>();
+            service.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

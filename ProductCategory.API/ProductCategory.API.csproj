@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ProductCategory.Application\ProductCategory.Application.csproj" />
     <ProjectReference Include="..\ProductCategory.Domain\ProductCategory.Domain.csproj" />
     <ProjectReference Include="..\ProdutoCategory.Data\ProdutoCategory.Data.csproj" />
   </ItemGroup>

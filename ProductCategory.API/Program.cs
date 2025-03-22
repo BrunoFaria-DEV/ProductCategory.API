@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ProductCategory.API.Dependencies;
 using ProdutoCategory.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.Injectable();
+
 builder.Services.AddOpenApi();
 
 // Add Context Configuration

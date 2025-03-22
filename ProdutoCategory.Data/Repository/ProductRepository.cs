@@ -5,7 +5,7 @@ using ProdutoCategory.Data.Interface;
 
 namespace ProdutoCategory.Data.Repository
 {
-    public class ProductsRepository(ApplicationContext context) : IProductsRepository
+    public class ProductRepository(ApplicationContext context) : IProductRepository
     {
         private readonly ApplicationContext _context = context;
 
@@ -24,19 +24,19 @@ namespace ProdutoCategory.Data.Repository
             return await _context.Product.AsNoTracking().Where(p => EF.Functions.Like(p.Name, $"%{name}%")).ToListAsync();
         }
 
-        public void Add(Product entity)
+        public void Add(Product product)
         {
-            _context.Product.Add(entity);
+            _context.Product.Add(product);
         }
 
-        public void Update(Product entity)
+        public void Update(Product product)
         {
-            _context.Product.Update(entity);
+            _context.Product.Update(product);
         }
 
-        public void Delete(Product entity)
+        public void Delete(Product product)
         {
-            _context.Product.Remove(entity);
+            _context.Product.Remove(product);
         }
 
         public async Task<bool> SaveChanges()

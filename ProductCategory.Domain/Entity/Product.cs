@@ -25,14 +25,11 @@ namespace ProductCategory.Domain.Entity
             Description = description;
         }
 
-        public void SetName( string name, string description ) 
+        public void Update(string name, string description) 
         {
             this.Name = name;
-        }
-
-        public void SetDescription(string name, string description)
-        {
             this.Description = description;
         }
+
     }
 }
