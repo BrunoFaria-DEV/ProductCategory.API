@@ -11,7 +11,7 @@ using ProdutoCategory.Data.Context;
 namespace ProdutoCategory.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250314015648_InitialCreate")]
+    [Migration("20250331184005_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -44,7 +44,7 @@ namespace ProdutoCategory.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,7 +17,7 @@ namespace ProductCategory.API.Controllers
             if (products == null || !products.Any()) 
                 return NotFound();
             
-            return Ok( products );
+            return Ok(products);
         }
 
         [HttpGet("{id}")]

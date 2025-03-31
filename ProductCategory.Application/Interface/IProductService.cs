@@ -1,5 +1,4 @@
 ﻿using ProductCategory.Domain.Dto;
-using ProductCategory.Domain.Entity;
 
 namespace ProductCategory.Application.Interface
 {
