@@ -6,7 +6,8 @@ namespace ProductCategory.Application.Interface
     {
         Task<List<ProductDto>> Get();
         Task<ProductDto> GetById(int id);
-        Task<List<ProductDto>> GetByName(string name);
+        //Task<List<ProductDto>> GetByName(string name, int pageNumber, int pageSize);
+        Task<ProductPaginatedDto> GetByName(string name, int pageNumber, int pageSize);
         Task<bool> Add(ProductDto dto);
         Task<bool> Update(int id, ProductDto dto);
         Task<bool> Delete(int id);

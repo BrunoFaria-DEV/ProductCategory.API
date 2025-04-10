@@ -30,15 +30,28 @@ namespace ProductCategory.Application.Service
             return productDto;
         }
 
-        public async Task<List<ProductDto>> GetByName(string name)
-        {
-            var products = await _repository.GetByName(name);
-            if (!products.Any())
-                return new List<ProductDto>();
+        //public async Task<List<ProductDto>> GetByName(string name, int pageNumber, int pageSize)
+        //{
+        //    var products = await _repository.GetByName(name, pageNumber, pageSize);
+        //    if (!products.Any())
+        //        return new List<ProductDto>();
 
-            var productsDto = products.ToDto().ToList();
-            return productsDto;
+        //    var productsDto = products.ToDto().ToList();
+        //    return productsDto;
+        //}
+
+        public async Task<ProductPaginatedDto> GetByName(string name, int pageNumber, int pageSize)
+        {
+            var totalPages = (int)Math.Ceiling((double)await _repository.CountByName(name) / pageSize);
+
+            var products = await _repository.GetByName(name, pageNumber, pageSize);
+            if (!products.Any())
+                return new ProductPaginatedDto();
+
+            var productsPaginatedDto = products.ToPaginatedDto(totalPages, pageNumber, pageSize);
+            return productsPaginatedDto;
         }
+
 
         public async Task<bool> Add(ProductDto productDto)
         {

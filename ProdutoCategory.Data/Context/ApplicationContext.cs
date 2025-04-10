@@ -8,6 +8,7 @@ namespace ProdutoCategory.Data.Context
         public ApplicationContext(DbContextOptions options) : base(options) {}
 
         public DbSet<Product> Product { get; set; }
+        public DbSet<Category> Category { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {}
     }

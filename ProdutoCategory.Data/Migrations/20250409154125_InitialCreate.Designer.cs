@@ -11,7 +11,7 @@ using ProdutoCategory.Data.Context;
 namespace ProdutoCategory.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250331184005_InitialCreate")]
+    [Migration("20250409154125_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,24 @@ namespace ProdutoCategory.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("ProductCategory.Domain.Entity.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("character varying(120)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("ProductCategory.Domain.Entity.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -31,6 +49,9 @@ namespace ProdutoCategory.Data.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -44,7 +65,23 @@ namespace ProdutoCategory.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("ProductCategory.Domain.Entity.Product", b =>
+                {
+                    b.HasOne("ProductCategory.Domain.Entity.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("ProductCategory.Domain.Entity.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,6 +12,8 @@ namespace ProductCategory.Application.Extensions
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
+                CategoryId = product.CategoryId,
+                Category = product.Category,
             };
         }
 

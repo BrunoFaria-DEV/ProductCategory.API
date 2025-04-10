@@ -30,11 +30,11 @@ namespace ProductCategory.API.Controllers
             return Ok(product);
         }
 
-        [HttpGet("get_by_name/{name}")]
-        public async Task<IActionResult> GetByName(string name)
+        [HttpGet("search")]
+        public async Task<IActionResult> GetByName([FromQuery] string name, [FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var products = await _productService.GetByName(name);
-            if (products == null || !products.Any())
+            var products = await _productService.GetByName(name, pageNumber, pageSize);
+            if (products.Products == null || !products.Products.Any())
                 return NotFound();
 
             return Ok(products);

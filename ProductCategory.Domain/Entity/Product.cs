@@ -15,6 +15,9 @@ namespace ProductCategory.Domain.Entity
         [MaxLength(500)]
         public string Description { get; private set; }
 
+        public int? CategoryId { get; private set; }
+        public Category? Category { get; private set; }
+
         public Product(int id, string name, string description)
         {
             Id = id;
