@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductCategory.Domain.Entity;
 
-namespace ProdutoCategory.Data.Context
+namespace ProductCategory.Data.Context
 {
     public class ApplicationContext : DbContext
     {

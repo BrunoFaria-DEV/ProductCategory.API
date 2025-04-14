@@ -1,8 +1,8 @@
 ﻿namespace ProductCategory.Domain.Dto
 {
-    public class ProductPaginatedDto
+    public class CategoryPaginatedDto
     {
-        public List<ProductDto> Products { get; set; } = new List<ProductDto>();
+        public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
         public int TotalItems { get; set; }
         public int TotalPages { get; set; }
         public int CurrentPage { get; set; }

@@ -1,9 +1,9 @@
 ﻿using ProductCategory.Application.Interface;
 using ProductCategory.Application.Service;
-using ProdutoCategory.Data.Interface;
-using ProdutoCategory.Data.Repository;
+using ProductCategory.Data.Interface;
+using ProductCategory.Data.Repository;
 
-namespace ProductCategory.API.Dependencies
+namespace ProductCategory.API.Configurations
 {
     public static class DependencyInjection
     {
@@ -11,6 +11,8 @@ namespace ProductCategory.API.Dependencies
         {
             service.AddScoped<IProductService, ProductService>();
             service.AddScoped<IProductRepository, ProductRepository>();
+            service.AddScoped<ICategoryService, CategoryService>();
+            service.AddScoped<ICategoryRepository, CategoryRepository>();
         }
     }
 }

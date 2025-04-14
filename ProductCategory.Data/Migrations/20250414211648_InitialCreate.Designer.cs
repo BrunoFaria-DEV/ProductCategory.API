@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using ProdutoCategory.Data.Context;
+using ProductCategory.Data.Context;
 
 #nullable disable
 
-namespace ProdutoCategory.Data.Migrations
+namespace ProductCategory.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250409154125_InitialCreate")]
+    [Migration("20250414211648_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

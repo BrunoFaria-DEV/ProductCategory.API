@@ -2,7 +2,8 @@
 using ProductCategory.Application.Interface;
 using ProductCategory.Domain.Dto;
 using ProductCategory.Domain.Entity;
-using ProdutoCategory.Data.Interface;
+using ProductCategory.Data.Interface;
+using ProductCategory.Data.Paginate;
 
 namespace ProductCategory.Application.Service
 {
@@ -10,14 +11,24 @@ namespace ProductCategory.Application.Service
     {
         private readonly IProductRepository _repository = repository;
 
-        public async Task<List<ProductDto>> Get()
+        public async Task<ProductPaginatedDto> Get(int pageNumber, int pageSize)
         {
-            var products = await _repository.Get();
-            if (!products.Any())
-                return new List<ProductDto>();
+            var query = _repository.Get();
 
-            var productsDto = products.ToDto().ToList();
-            return productsDto;
+            var paginateResult = await SimplePaginations.CompletePaginate(query, pageNumber, pageSize);
+            if (!paginateResult.Items.Any())
+                return new ProductPaginatedDto();
+
+            var productsPaginatedDto = new ProductPaginatedDto()
+            {
+                Products = paginateResult.Items.ToProductDto().ToList(),
+                TotalItems = paginateResult.TotalItems,
+                TotalPages = paginateResult.TotalPages,
+                CurrentPage = paginateResult.CurrentPage,
+                PageSize = paginateResult.PageSize,
+            };
+
+            return productsPaginatedDto;
         }
 
         public async Task<ProductDto> GetById(int id)
@@ -26,29 +37,27 @@ namespace ProductCategory.Application.Service
             if (product == null)
                 return null;
 
-            var productDto = product.ToDto();
+            var productDto = product.ToProductDto();
             return productDto;
         }
 
-        //public async Task<List<ProductDto>> GetByName(string name, int pageNumber, int pageSize)
-        //{
-        //    var products = await _repository.GetByName(name, pageNumber, pageSize);
-        //    if (!products.Any())
-        //        return new List<ProductDto>();
-
-        //    var productsDto = products.ToDto().ToList();
-        //    return productsDto;
-        //}
-
         public async Task<ProductPaginatedDto> GetByName(string name, int pageNumber, int pageSize)
         {
-            var totalPages = (int)Math.Ceiling((double)await _repository.CountByName(name) / pageSize);
+            var query = _repository.GetByName(name);
 
-            var products = await _repository.GetByName(name, pageNumber, pageSize);
-            if (!products.Any())
+            var paginateResult = await SimplePaginations.CompletePaginate(query, pageNumber, pageSize);
+            if (!paginateResult.Items.Any())
                 return new ProductPaginatedDto();
 
-            var productsPaginatedDto = products.ToPaginatedDto(totalPages, pageNumber, pageSize);
+            var productsPaginatedDto = new ProductPaginatedDto()
+            {
+                Products = paginateResult.Items.ToProductDto().ToList(),
+                TotalItems = paginateResult.TotalItems,
+                TotalPages = paginateResult.TotalPages,
+                CurrentPage = paginateResult.CurrentPage,
+                PageSize = paginateResult.PageSize,
+            };
+
             return productsPaginatedDto;
         }
 

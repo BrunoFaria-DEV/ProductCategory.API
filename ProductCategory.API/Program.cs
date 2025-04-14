@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using ProductCategory.API.Dependencies;
-using ProdutoCategory.Data.Context;
+using ProductCategory.API.Configurations;
+using ProductCategory.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

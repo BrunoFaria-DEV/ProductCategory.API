@@ -5,7 +5,7 @@ namespace ProductCategory.Application.Extensions
 {
     public static class ProductExtensions
     {
-        public static ProductDto ToDto(this Product product)
+        public static ProductDto ToProductDto(this Product product)
         {
             return new ProductDto()
             {
@@ -17,9 +17,9 @@ namespace ProductCategory.Application.Extensions
             };
         }
 
-        public static IEnumerable<ProductDto> ToDto(this IEnumerable<Product> products)
+        public static IEnumerable<ProductDto> ToProductDto(this IEnumerable<Product> products)
         {
-            return products.Select(product => product.ToDto());
+            return products.Select(product => product.ToProductDto());
         }
     }
 }
